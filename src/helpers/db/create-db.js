@@ -1,7 +1,7 @@
 require("dotenv").config();
 
-const connectDb = require("../db/connect");
-const Product = require("../models/product");
+const connectDb = require("../../db/connect");
+const Product = require("../../models/product");
 const productList = require("./products.json");
 
 // SECTION: this variables imported from .env file

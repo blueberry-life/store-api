@@ -1,3 +1,4 @@
+//  NOTE: this function take 3 arguments and checks req.query contains them or not and create new object with them and return it
 function queryChecker(name, featured, company) {
   const userQuery = {};
   if (name) {
