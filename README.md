@@ -10,10 +10,3 @@ REST API Routes:<br>
 localhost:port/api/v1/products<br>
 localhost:port/api/v1/products/:id<br>
 
-queries you can do in this api:<br>
-?sort:by default sorted by created date<br>
-numericFilter options:<br>
-price:product price<br>
-rating:product rating<br>
-user operators:<br>
-<,>,=,<=,>=<br>
