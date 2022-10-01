@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "nodemon ./src/server.js",
     "start": "node ./src/server.js",
-    "createDb": "node ./src/helpers/create-db.js"
+    "createDb": "node ./src/helpers/db/create-db.js"
   },
   "repository": {
     "type": "git",
