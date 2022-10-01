@@ -1,6 +1,16 @@
 const Product = require("../models/product");
-const queryChecker = require("../helpers/query-checker");
+const {
+  sortChecker,
+  fieldChecker,
+  queryChecker,
+  pagination,
+} = require("../helpers/query-checkers");
 
+async function getSingleTask(req, res, next) {
+  const { id: productId } = req.params;
+  const product = await Product.findOne({ _id: productId });
+  res.status(200).json({ success: true, data: { product } });
+}
 async function createProduct(req, res, next) {
   const userInput = req.body;
   console.log(userInput);
@@ -18,11 +28,6 @@ async function updateProduct(req, res, next) {
     new: true,
     runValidators: true,
   });
-  if (!product) {
-    return next(
-      createCustomError(`there is no product with id: ${productId}`, 404)
-    );
-  }
   return res
     .status(200)
     .json({ success: true, data: { msg: "product updated", product } });
@@ -31,43 +36,31 @@ async function updateProduct(req, res, next) {
 async function deleteProduct(req, res, next) {
   const { id: productId } = req.params;
   const product = await Product.findByIdAndDelete(productId);
-  if (!product) {
-    return next(
-      createCustomError(`there is no product with id: ${productId}`, 404)
-    );
-  }
   return res
     .status(200)
     .json({ success: true, data: { msg: "product deleted", product } });
 }
 
-async function getAllProductStatic(req, res, next) {
-  const productList = await Product.find({});
-  return res
-    .status(200)
-    .json({ success: true, data: { nbHits: productList.length, productList } });
-}
 async function getAllProducts(req, res, next) {
-  const { name, company, featured, sort } = req.query;
-  const userQuery = queryChecker(name, featured, company);
+  const userReq = req.query;
 
-  // SECTION: this code checks if sort exists and if exist if there is multiple sort refactor it for use in .sort mongoose method
+  // SECTION: this functions checks incoming request and if there was any query take it and modify's query object and execute it on db
+  const userQuery = queryChecker(userReq);
   let result = Product.find(userQuery);
-  if (sort) {
-    const sortList = sort.split(",").join(" ");
-    result = result.sort(sortList);
-  }
-  const productList = await result;
+  sortChecker(userReq, result);
+  fieldChecker(userReq, result);
+  pagination(req.query, result);
   // !SECTION
+  const productList = await result;
   return res
     .status(200)
     .json({ success: true, data: { nbHits: productList.length, productList } });
 }
 
 module.exports = {
-  getAllProductStatic,
   getAllProducts,
   createProduct,
   updateProduct,
   deleteProduct,
+  getSingleTask,
 };
