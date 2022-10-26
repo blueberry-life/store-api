@@ -23,7 +23,7 @@ async function createProduct(req, res, next) {
 
 async function updateProduct(req, res, next) {
   const { id: productId } = req.params;
-  // NOTE: if you don't set options in findOneUpdate it wont check for validators on updated item
+  // * if you don't set options in findOneUpdate it wont check for validators on updated item
   const product = await Product.findOneAndUpdate({ _id: productId }, req.body, {
     new: true,
     runValidators: true,
@@ -44,13 +44,13 @@ async function deleteProduct(req, res, next) {
 async function getAllProducts(req, res, next) {
   const userReq = req.query;
 
-  // SECTION: this functions checks incoming request and if there was any query take it and modify's query object and execute it on db
+  // * this functions checks incoming request and if there was any query take it and modify's query object and execute it on db
   const userQuery = queryChecker(userReq);
   let result = Product.find(userQuery);
   sortChecker(userReq, result);
   fieldChecker(userReq, result);
   pagination(req.query, result);
-  // !SECTION
+
   const productList = await result;
   return res
     .status(200)

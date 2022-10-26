@@ -1,4 +1,4 @@
-//  NOTE: this function take 3 arguments and checks req.query contains them or not and create new object with them and return it
+//  * this function take 3 arguments and checks req.query contains them or not and create new object with them and return it
 function queryChecker(userReq) {
   const userQuery = {};
   if (userReq.name) {
@@ -10,7 +10,7 @@ function queryChecker(userReq) {
   if (userReq.featured) {
     userQuery.featured = featured === "true" ? true : false;
   }
-  // NOTE: this code add numeric filter function to the query checker and converts mongoose numeric operators to user friendly math operators
+  // * this code add numeric filter function to the query checker and converts mongoose numeric operators to user friendly math operators
   if (userReq.numericFilter) {
     const operatorMap = {
       ">": "$gt",
@@ -35,7 +35,7 @@ function queryChecker(userReq) {
   return userQuery;
 }
 
-// NOTE: this function checks if user provide field and modify query base on user input
+// * this function checks if user provide field and modify query base on user input
 function fieldChecker(userReq, result) {
   const field = userReq.field;
   if (field) {
@@ -45,7 +45,7 @@ function fieldChecker(userReq, result) {
   return result;
 }
 
-// NOTE: this function checks if user provide sort and modify query base on user input
+// * this function checks if user provide sort and modify query base on user input
 function sortChecker(userReq, result) {
   const sort = userReq.sort;
   if (sort) {
@@ -57,7 +57,7 @@ function sortChecker(userReq, result) {
   return result;
 }
 
-// NOTE: this function adds pagination to query object
+// * this function adds pagination to query object
 function pagination(userReq, result) {
   const limit = Number(userReq.limit) || 10;
   const page = Number(userReq.page) || 1;

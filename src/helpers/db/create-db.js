@@ -4,11 +4,10 @@ const connectDb = require("../../db/connect");
 const Product = require("../../models/product");
 const productList = require("./products.json");
 
-// SECTION: this variables imported from .env file
+// * this variables imported from .env file
 const dbUrl = process.env.dbUrl;
 const username = process.env.MONGO_INITDB_ROOT_USERNAME;
 const password = process.env.MONGO_INITDB_ROOT_PASSWORD;
-// !SECTION
 
 async function createDb() {
   try {

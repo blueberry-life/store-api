@@ -1,0 +1,15 @@
+# Git
+.git
+.gitignore
+
+# Docker
+.Dockerfile
+.docker-compose.yaml
+
+# Node
+node_modules/
+package-lock.json
+
+# others
+LICENSE
+README.md
