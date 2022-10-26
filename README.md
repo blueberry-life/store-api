@@ -7,6 +7,6 @@ you can do all crud operations in this api<br>
 
 <hr>
 NOTE:<br>
--i didn't use live update source code for docker cause it's diffrent in every system.<br>
+-i didn't use live update source code for docker cause it's different in every system.<br>
 -default behavier of backend docker image is runs server with nodemon in dev mode.<br>
 
