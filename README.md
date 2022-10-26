@@ -6,7 +6,7 @@ create-db file connects to mongodb server and create mock data base on products.
 you can do all crud operations in this api<br>
 
 <hr>
-REST API Routes:<br>
-localhost:port/api/v1/products<br>
-localhost:port/api/v1/products/:id<br>
+NOTE:<br>
+-i didn't use live update source code for docker cause it's diffrent in every system.<br>
+-default behavier of backend docker image is runs server with nodemon in dev mode.<br>
 
